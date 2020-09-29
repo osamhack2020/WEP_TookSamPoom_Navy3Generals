@@ -11,6 +11,7 @@ let db = tsp_db.connectDb();
 //tsp_db.initializeDb(db);
 //tsp_db.dummyData(db);
 tsp_db.getUsers(db);
+tsp_db.getRecord(db, 1);
 tsp_db.closeDb(db);
 
 

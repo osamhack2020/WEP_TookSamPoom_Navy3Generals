@@ -35,23 +35,54 @@ exports.getUsers = function(db) {
     });
 }
 
+exports.getRecord = function(db, id) {
+    let sql = `SELECT push_up, sit_up, running, date FROM Record where id = ` + id + ` order by date`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        rows.forEach((row) => {
+            console.log(row.date + " " + row.push_up + " " + row.sit_up + " " + row.running);
+        });
+    });
+}
+
+
+
 exports.initializeDb = function(db) {
-    db.run('CREATE TABLE User(user_id INTEGER PRIMARY KEY, name TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL)');
+    db.run('CREATE TABLE User(user_id INTEGER PRIMARY KEY, name TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL, age INTEGER NOT NULL, sex TEXT NOT NULL)');
+    db.run('CREATE TABLE Record(id INTEGER, push_up INTEGER NOT NULL, sit_up INTEGER NOT NULL, running INTEGER NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP)');
+
 }
 
 exports.dummyData = function(db) {
 
     var data=[
-        ['김기태', 170, 72],
-        ['ABC', 180, 80]
+        ['김기태', 170, 72, 30, 'male'],
+        ['ABC', 180, 80, 20, 'female']
         ]
         
-        for (var i=0;i<data.length; i++){
-             db.run("INSERT INTO User(name,height, weight) values(?,?,?)",data[i][0],data[i][1], data[i][2],(err,rows)=>{
-             if(err){
+    for (var i=0;i<data.length; i++){
+        db.run("INSERT INTO User(name,height, weight, age, sex) values(?,?,?,?,?)",data[i][0], data[i][1], data[i][2], data[i][3], data[i][4], (err,rows)=>{
+            if(err){
                 throw err;
-             }
-              console.log('Insert Success');
-         })
-        }
+            }
+            console.log('Insert Success');
+        })
+    }
+
+    var data=[
+        [1, 70, 72, 900],
+        [2, 80, 80, 850]
+        ]
+        
+    for (var i=0;i<data.length; i++){
+        db.run("INSERT INTO Record(id, push_up, sit_up, running) values(?,?,?,?)",data[i][0],data[i][1], data[i][2], data[i][3],(err,rows)=>{
+            if(err){
+                throw err;
+            }
+            console.log('Insert Success');
+        })
+    }
+
 } 
