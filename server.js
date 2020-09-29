@@ -1,6 +1,8 @@
 const express = require('express')
 const tsp_db = require('./tsp_db.js')
+const ms_function = require('./ms_function.js')
 const app = express();
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -10,8 +12,8 @@ app.get('/', (req, res) => {
 let db = tsp_db.connectDb();
 //tsp_db.initializeDb(db);
 //tsp_db.dummyData(db);
-tsp_db.getUsers(db);
-tsp_db.closeDb(db);
+//tsp_db.getUsers(db);
+//tsp_db.closeDb(db);
 
 
 

@@ -23,6 +23,7 @@ exports.closeDb = function(db) {
     });
 }
 
+
 exports.getUsers = function(db) {
     let sql = `SELECT name, height, weight FROM User`;
     db.all(sql, [], (err, rows) => {
@@ -52,6 +53,6 @@ exports.dummyData = function(db) {
                 throw err;
              }
               console.log('Insert Success');
-         })
+             })
         }
 } 
