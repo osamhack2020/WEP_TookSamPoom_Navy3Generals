@@ -1,18 +1,23 @@
 const express = require('express')
 const tsp_db = require('./tsp_db.js')
 const app = express();
+const path = require('path');
 
-app.get('/', (req, res) => {
+app.get('/data', (req, res) => {
   res.send('Hello World!')
 });
 
 
-let db = tsp_db.connectDb();
-//tsp_db.initializeDb(db);
-//tsp_db.dummyData(db);
+const db = tsp_db.connectDb();
+//tsp_db.initializeDbWithDummy(db);
 tsp_db.getUsers(db);
 tsp_db.getRecord(db, 1);
 tsp_db.closeDb(db);
+
+
+app.use('/', function(req,res){
+  res.sendFile(path.join(__dirname + '/express/index.html'));
+});
 
 
 
