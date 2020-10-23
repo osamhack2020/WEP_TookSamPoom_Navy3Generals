@@ -2,12 +2,92 @@
 <html lang="en">
 <title>TestTemplate</title>
 <head>
-    <script src= 
-"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"
-                charset="utf-8"/> 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="RadarChart.js"></script>
+
+
+    <style>
+        .radar-chart .area {
+  fill-opacity: 0.7;
+}
+.radar-chart.focus .area {
+  fill-opacity: 0.3;
+}
+.radar-chart.focus .area.focused {
+  fill-opacity: 0.9;
+}
+.area.germany, .germany .circle {
+  fill: #FFD700;
+  stroke: none;
+}
+.area.argentina, .argentina .circle {
+  fill: #ADD8E6;
+  stroke: none;
+}
+    </style>
 </head>
 
 <body>
+Hello!
 
+<div class="chart-container"></div>
+<script>
+RadarChart.draw(".chart-container", data);
+</script>
+
+<script type="text/javascript">
+var data = [
+  {
+    className: 'germany', // optional, can be used for styling
+    axes: [
+      {axis: "strength", value: 13, yOffset: 10},
+      {axis: "intelligence", value: 6},
+      {axis: "charisma", value: 5},  
+      {axis: "dexterity", value: 9},  
+      {axis: "luck", value: 2, xOffset: -20}
+    ]
+  },
+  {
+    className: 'argentina',
+    axes: [
+      {axis: "strength", value: 6},
+      {axis: "intelligence", value: 7},
+      {axis: "charisma", value: 10},  
+      {axis: "dexterity", value: 13},  
+      {axis: "luck", value: 9}
+    ]
+  }
+];
+
+var chart = RadarChart.chart();
+var svg = d3.select('body').append('svg')
+  .attr('width', 600)
+  .attr('height', 800);
+
+// draw one
+svg.append('g').classed('focus', 1).datum(data).call(chart);
+
+// draw many radars
+var game = svg.selectAll('g.game').data(
+  [
+    data,
+    data,
+    data,
+    data
+  ]
+);
+game.enter().append('g').classed('game', 1);
+game
+  .attr('transform', function(d, i) { return 'translate(150,600)'; })
+  .call(chart);
+</script>
+
+
+<div id="body">
+    <div id="chart"></div>
+  </div>
+
+end
 </body>
 </html>
