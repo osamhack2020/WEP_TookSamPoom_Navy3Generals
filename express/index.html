@@ -26,6 +26,18 @@
       fill: #ADD8E6;
       stroke: none;
     }
+    .area.army, .army .circle {
+      fill: #FFD700;
+      stroke: none;
+    }
+    .area.navy, .navy .circle {
+      fill: #0c18b9c2;
+      stroke: none;
+    }
+    .area.airforce, .airfoce .circle {
+      fill: #079442ce;
+      stroke: none;
+    }
   </style>
   <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
   <script type="text/javascript" src="../src/radar-chart.js"></script>
@@ -41,13 +53,15 @@
 Hello!
 
 <div class="chart-container"></div>
+<div class="class-chart-container"></div>
   <script type="text/javascript">
     RadarChart.defaultConfig.levelTick = true;
-
+    RadarChart.defaultConfig.maxValue = 5;
     d3.json("DataDir/test_data1.json", function(data) {
-      console.log(data);
-
       RadarChart.draw(".chart-container", data);
+    });
+    d3.json("DataDir/class_average.json", function(data) {
+      RadarChart.draw(".class-chart-container", data);
     });
 
   </script>
