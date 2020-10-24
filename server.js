@@ -4,6 +4,7 @@ const ms_function = require('./ms_function.js')
 const app = express();
 const path = require('path');
 
+app.use(express.static(path.join(__dirname, '/express/')))
 app.get('/data', (req, res) => {
   res.send('Hello World!')
 });
