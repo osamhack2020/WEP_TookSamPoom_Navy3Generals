@@ -1,72 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
   <meta charset="utf-8">
 <link rel="stylesheet" href="src/pure-min.css">
 <link rel="stylesheet" href="src/radar-chart.css">
+<link rel="stylesheet" href="src/radar-chart-shape.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
 <title>TestTemplate</title>
 <head>
   <style>
     body {
       padding: 20px;
     }
-    .radar-chart .area {
-      fill-opacity: 0.7;
+    .chart-container {
+      float: left;
     }
-    .radar-chart.focus .area {
-      fill-opacity: 0.3;
-    }
-    .radar-chart.focus .area.focused {
-      fill-opacity: 0.9;
-    }
-    .area.kkt, .kkt .circle {
-      fill: #FFD700;
-      stroke: none;
-    }
-    .area.mincheol, .mincheol .circle {
-      fill: #ADD8E6;
-      stroke: none;
-    }
-    .area.army, .army .circle {
-      fill: #FFD700;
-      stroke: none;
-    }
-    .area.navy, .navy .circle {
-      fill: #0c18b9c2;
-      stroke: none;
-    }
-    .area.airforce, .airfoce .circle {
-      fill: #079442ce;
-      stroke: none;
+
+    .class-chart-container {
+      float: left;
     }
   </style>
+  <style>
+  #table-location {
+    margin-left: 0;
+    margin-right: auto;
+    width: 70%;
+  }
+  </style>
+
   <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
   <script type="text/javascript" src="../src/radar-chart.js"></script>
-  <script type="text/javascript">
-    RadarChart.defaultConfig.color = function() {};
-    RadarChart.defaultConfig.radius = 3;
-  </script>
 
 
 </head>
 
 <body>
-Hello!
+<h1>특산품 Admin Pannel</h1>
+<div class="radar-charts" style="align-content: center;">
+  <div class="class-chart-container"><p style="text-align:center;">각 군 평균체력</p></div>
+</div>
+<div id="table-location"></div>
 
-<div class="chart-container"></div>
-<div class="class-chart-container"></div>
+
+
   <script type="text/javascript">
     RadarChart.defaultConfig.levelTick = true;
     RadarChart.defaultConfig.maxValue = 5;
-    d3.json("DataDir/test_data1.json", function(data) {
-      RadarChart.draw(".chart-container", data);
-    });
+    RadarChart.defaultConfig.levels = 5;
+    RadarChart.defaultConfig.radius = 3;
+
     d3.json("DataDir/class_average.json", function(data) {
       RadarChart.draw(".class-chart-container", data);
     });
 
   </script>
+  
+  <script>
+  var svg = d3.select("body").append("svg")
+	.attr("height", 1)
+  .attr("width", 1);
+  var table = d3.select("#table-location")
+  .append("table")
+	.attr("class", "table table-condensed table-striped"),
+	thead = table.append("thead"),
+  tbody = table.append("tbody");
+  
+  d3.json("DataDir/table_data.json", function(error, data){
+    console.log(data);
+
+	// Get every column value
+	var columns = Object.keys(data[0])
+		.filter(function(d){
+			return ((d != "Year"));
+		});
+
+	var header = thead.append("tr")
+		.selectAll("th")
+		.data(columns)
+		.enter()
+		.append("th")
+			.text(function(d){ return d;})
+			.on("click", function(d){
+				if (d == "각군" || d == "사령부" || d == "전대" || d == "부대명"){
+					rows.sort(function(a, b) {
+						if (a[d] < b[d]){
+							return -1;
+						}
+						if (a[d] > b[d]){
+							return 1;
+						}
+						else{
+							return 0;
+						}
+    				});
+				}
+				else {
+					rows.sort(function(a, b){
+						return b[d] - a[d];
+					})
+				}
+  			});
+
+	var rows = tbody.selectAll("tr")
+		.data(data)
+		.enter()
+		.append("tr")
+		.on("mouseover", function(d){
+			d3.select(this)
+				.style("background-color", "orange");
+		})
+		.on("mouseout", function(d){
+			d3.select(this)
+				.style("background-color","transparent");
+		});
+
+	var cells = rows.selectAll("td")
+		.data(function(row){
+			return columns.map(function(d, i){
+				return {i: d, value: row[d]};
+			});
+		})
+		.enter()
+		.append("td")
+		.html(function(d){ return d.value;});
+		
 
 
-end
+});
+</script>
+
 </body>
 </html>

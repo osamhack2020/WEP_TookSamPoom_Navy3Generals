@@ -3,16 +3,16 @@
       "className":"army",
       "axes":[  
         {  
-          "axis":"pushUp",
+          "axis":"PushUp",
           "value":3
         },
         {  
-          "axis":"sitUp",
+          "axis":"SitUp",
           "value":3.2
         },
         {  
           "axis":"Running",
-          "value":2.2
+          "value":4
         }
       ]
     },
