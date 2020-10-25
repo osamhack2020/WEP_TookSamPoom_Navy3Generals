@@ -64,7 +64,8 @@ exports.getRecord = function(db, id) {
 
 exports.initializeDb = function(db) {
     db.run('CREATE TABLE User(user_id INTEGER PRIMARY KEY, name TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL, age INTEGER NOT NULL, sex TEXT NOT NULL)');
-    db.run('CREATE TABLE Record(id INTEGER, push_up INTEGER NOT NULL, sit_up INTEGER NOT NULL, running INTEGER NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP)');
+    db.run('CREATE TABLE Record(id INTEGER, push_up INTEGER NOT NULL, sit_up INTEGER NOT NULL, running INTEGER NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(id) REFERENCES User(user_id))');
+    db.run('CREATE TABLE UserPublic(id INTEGER, type TEXT NOT NULL, squadron TEXT NOT NULL, battalion TEXT NOT NULL, FOREIGN KEY(id) REFERENCES User(user_id))');
 }
 
 exports.initializeDbWithDummy = function(db) {

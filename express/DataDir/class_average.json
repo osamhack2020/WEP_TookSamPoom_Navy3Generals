@@ -1,51 +1,60 @@
 [  
     {  
-      "className":"army",
-      "axes":[  
+      "key":"육군",
+      "values":[  
         {  
-          "axis":"PushUp",
+          "axis":"팔굽혀펴기",
+          "key":"육군",
           "value":3
         },
         {  
-          "axis":"SitUp",
+          "axis":"윗몸일으키기",
+          "key":"육군",
           "value":3.2
         },
         {  
-          "axis":"Running",
+          "axis":"3Km 달리기",
+          "key":"육군",
           "value":4
         }
       ]
     },
     {  
-      "className":"navy",
-      "axes":[  
+      "key":"해군",
+      "values":[  
         {  
-          "axis":"pushUp",
+          "axis":"팔굽혀펴기",
+          "key":"해군",
           "value":4
         },
         {  
-          "axis":"sitUp",
+          "axis":"윗몸일으키기",
+          "key":"해군",
           "value":3.5
         },
         {  
-          "axis":"Running",
+          "axis":"3Km 달리기",
+          "key":"해군",
           "value":3.5
         }
       ]
     },
     {  
-      "className":"airforce",
-      "axes":[  
+      "key":"공군",
+      "values":[  
         {  
-          "axis":"pushUp",
+          "axis":"팔굽혀펴기",
+          "key":"공군",
           "value":2.7
         },
         {  
-          "axis":"sitUp",
+          "axis":"윗몸일으키기",
+          "key":"공군",
           "value":2.7
         },
         {  
-          "axis":"Running",
+          "axis":"3Km 달리기",
+          "key":"공군",
           "value":1
         }
       ]

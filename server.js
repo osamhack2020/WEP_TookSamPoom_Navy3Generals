@@ -11,7 +11,7 @@ app.get('/data', (req, res) => {
 
 
 const db = tsp_db.connectDb();
-//tsp_db.initializeDbWithDummy(db);
+//tsp_db.initializeDb(db);
 tsp_db.getUsers(db);
 tsp_db.getRecord(db, 1);
 tsp_db.closeDb(db);
@@ -19,11 +19,11 @@ tsp_db.closeDb(db);
 
 
 app.use('/', function(req,res){
-  res.sendFile(path.join(__dirname + '/express/index.html'));
+  res.sendFile(path.join(__dirname + '/express/radar2/index.html'));
 });
 
 
 
 app.listen(8080, () => {
-  console.log('Example app listening on port 8000!')
+  console.log('TSPWeb listening on port 8000!')
 });
