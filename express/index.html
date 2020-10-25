@@ -31,25 +31,26 @@
 			margin-right: auto;
 			width: 70%;
 		}
+
+		
 	</style>
 
 
 </head>
 
 <body>
-	<h1
-		style="text-align: center;background-color: darkgray;margin-top: 0;padding-top: 20px;font-family:'Times New Roman', Times, serif, sans-serif;">
+	<h1 style="text-align: center;background-color: darkgray;margin-top: 0;padding-top: 20px;font-family:'Times New Roman', Times, serif, sans-serif;">
 		특산품 Admin Pannel</h1>
 
-	<div class="radar-chart-container">
-		<div class="radarChart" style="align-content: center;">
+	<div class="radar-chart-container" style="float: left;">
+		<div class="radarChart" style="float: left;">
 			<p style="text-align:center;font-size: 30px;">각 군 평균체력</p>
+		</div>
+		<div class="line-chart" style="float: left; padding-right: 10px;width: 1000px;">
+			<canvas id="canvas"></canvas>
 		</div>
 	</div>
 
-	<div style="width:90%;">
-		<canvas id="canvas"></canvas>
-	</div>
 
 	<div id="table-location"></div>
 
@@ -155,50 +156,61 @@
 		});
 	</script>
 
-<script>
-	var config = {
-		type: 'line',
-		data: {
-			labels: [],
-			datasets: [{
-				label: 'My First dataset',
-				fill: false,
-				backgroundColor: window.chartColors.red,
-				borderColor: window.chartColors.red,
-				data: []
-			}, {
-				label: 'My Second dataset',
-				fill: false,
-				backgroundColor: window.chartColors.blue,
-				borderColor: window.chartColors.blue,
-				data: [],
-			}]
-		},
-		options: {
-			responsive: true,
-			title: {
-				display: true,
-				text: 'Chart with Multiline Labels'
+	<script>
+
+		const config = {
+			type: 'line',
+			data: {
+				labels: [],
+				datasets: []
 			},
-		}
-	};
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: '12개월 평균 체력 기록표'
+				},
+			}
+		};
 
-	d3.json("DataDir/class_average_overtime2.json", function (error, data) {
-		console.log(data);
-		var extent = data.filter(function(e) { return e.month});
-		const xdomain = d3.extent(extent);
-		console.log(xdomain);
-		data.forEach(function(d) {
+		window.onload = function () {
+			d3.json("DataDir/class_average_overtime2.json", function (error, data) {
+				config.data.labels = data.map((e) => { return e.month }).flat().sort().filter(function (el, i, a) { return i === a.indexOf(el) });
+				var lineData = data.map(function (e) {
+					if (e.type == "해군") {
+						return {
+							label: e.type,
+							fill: false,
+							borderColor: window.chartColors.blue,
+							backgroundcolor: window.chartColors.blue,
+							data: e.rank
+						}
+					} else if (e.type == "육군") {
+						return {
+							label: e.type,
+							fill: false,
+							borderColor: window.chartColors.yellow,
+							backgroundcolor: window.chartColors.yellow,
+							data: e.rank
+						}
+					}
+					return {
+						label: e.type,
+						fill: false,
+						borderColor: window.chartColors.green,
+						backgroundcolor: window.chartColors.green,
+						data: e.rank
+					}
+				});
+				config.data.datasets = lineData;
+				console.log(`labels 3: ${config.data.labels}`)
+				var ctx = document.getElementById('canvas').getContext('2d');
+				window.myLine = new Chart(ctx, config);
+			});
 
-		})
-	})
-	
+		};
 
-	window.onload = function() {
-		var ctx = document.getElementById('canvas').getContext('2d');
-		window.myLine = new Chart(ctx, config);
-	};
-</script>
+	</script>
 
 
 
