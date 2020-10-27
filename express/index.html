@@ -174,8 +174,9 @@
 		};
 
 		window.onload = function () {
-			d3.json("DataDir/class_average_overtime2.json", function (error, data) {
-				config.data.labels = data.map((e) => { return e.month }).flat().sort().filter(function (el, i, a) { return i === a.indexOf(el) });
+			d3.json("DataDir/class_average_overtime.json", function (error, data) {
+				//config.data.labels = data.map((e) => { return e.month }).flat().sort().filter(function (el, i, a) { return i === a.indexOf(el) });
+				config.data.labels = data[0].month;
 				var lineData = data.map(function (e) {
 					if (e.type == "해군") {
 						return {
