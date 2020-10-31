@@ -8,7 +8,7 @@
 특삼품은 크게 두 파트로 구성되어 있어 **TensorFlow** 기반의 체력검정 자동측정앱과 전군 통합 체력관리 웹시스템으로 구성되어 있습니다.  
 대한민국 군인이라면 매년 실시해야 하는 덕목중 하나가 바로 체력검정입니다. 체력은 국력이라는 말이 있듯이 군인에게 체력은 임무를 수행함에 있어 가장 중요한 덕목중에 하나입니다. 다만 현재 실시되는 아날로그 방식의 체력검정 시스템은 객관성의 부재, 아날로그 방식에서 발생하는 갖가지 휴먼에러, 많은 인력 동원의 필요성, 그리고 자율적인 체력검정 실시의 불가능 등 여러가지 단점을 가지고 있습니다. 저희는 이러한 단점을 극복하고 군에 효율적인 장병 체력관리 시스템을 제공하고자 하여 프로젝트를 시작하게 되었습니다. 
 
-<img src= https://github.com/osamhack2020/APP_TookSamPoom_Navy3Generals/blob/master/sampleImage/Tsproute.png width="1200">
+<img src= https://github.com/osamhack2020/APP_TookSamPoom_Navy3Generals/blob/master/sampleImage/Tsproutefix.png width="1200">
 
 ___
 ### TSP Web Solution
@@ -46,6 +46,9 @@ App은 크게 다양한 운동 종목을 측정할 수 있는 측정 엑티비�
 
 #### [Youtube 윗몸일으키기 시연영상](https://youtu.be/F8IG_mpT1xQ)
 [![AppVideo](https://github.com/osamhack2020/APP_TookSamPoom_Navy3Generals/blob/master/sampleImage/sit_up_video.png)](https://youtu.be/F8IG_mpT1xQ)
+
+#### [Youtube 3KM달리기 시연영상](https://www.youtube.com/watch?v=D5mjlxZzFYk&feature=youtu.be)
+[![AppVideo](https://github.com/osamhack2020/APP_TookSamPoom_Navy3Generals/blob/master/sampleImage/Youtube3KMrunningVideo.png)](https://youtu.be/D5mjlxZzFYk)
 
 ## 설치방법(Install)
 
